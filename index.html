@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pilchalacone — Streetwear, vintage y prendas únicas." />
+  <title>PILCHALACONE — Streetwear & Vintage</title>
+
+  <style>
+    :root{
+      --bg:#000000;
+      --paper:#111111;
+      --ink:#f5f5f5;
+      --muted:#999999;
+      --line:#292929;
+      --red:#b31d25;
+      --black:#050505;
+      --max:1440px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Arial, Helvetica, sans-serif;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+
+    .topbar{
+      height:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom:1px solid var(--line);
+      background:var(--black);
+      color:#fff;
+      font-size:10px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(243,240,232,.95);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      max-width:var(--max);
+      margin:auto;
+      min-height:74px;
+      padding:0 24px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+
+    .nav-left,.nav-right{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav-right{justify-content:flex-end}
+    .nav a:hover{text-decoration:underline;text-underline-offset:4px}
+
+    .brand{
+      width:145px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brand img{
+      width:145px;
+      max-height:60px;
+      object-fit:contain;
+      mix-blend-mode:multiply;
+    }
+
+    .menu-btn{
+      display:none;
+      border:0;
+      background:none;
+      padding:8px 0;
+      cursor:pointer;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      font-size:11px;
+    }
+
+    .hero{
+      min-height:calc(100vh - 106px);
+      max-width:var(--max);
+      margin:auto;
+      padding:34px 24px 40px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .hero-copy{
+      min-height:620px;
+      background:var(--black);
+      color:#fff;
+      padding:clamp(30px,5vw,76px);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-copy:after{
+      content:"P";
+      position:absolute;
+      right:-55px;
+      bottom:-130px;
+      font-size:430px;
+      font-weight:900;
+      line-height:1;
+      color:rgba(179,29,37,.2);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#bdb9b0;
+    }
+
+    h1{
+      margin:0;
+      max-width:800px;
+      font-size:clamp(60px,9vw,150px);
+      line-height:.78;
+      letter-spacing:-.08em;
+      font-weight:900;
+      text-transform:uppercase;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-bottom{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:25px;
+      position:relative;
+      z-index:1;
+    }
+    .hero-bottom p{
+      max-width:340px;
+      margin:0;
+      font-size:13px;
+      line-height:1.55;
+      color:#d0ccc4;
+    }
+
+    .outline-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid currentColor;
+      padding:14px 18px;
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      transition:.2s ease;
+      white-space:nowrap;
+    }
+    .outline-btn:hover{
+      background:#fff;
+      color:#111;
+    }
+
+    .hero-art{
+      min-height:620px;
+      position:relative;
+      background:
+        radial-gradient(circle at 50% 35%, #d5c4a8 0 13%, transparent 13.5%),
+        radial-gradient(circle at 50% 55%, #bfb09a 0 23%, transparent 23.5%),
+        linear-gradient(135deg,#ddd4c4,#aaa08d);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-art:before{
+      content:"PILCHALACONE";
+      position:absolute;
+      top:25px;
+      left:25px;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      z-index:2;
+    }
+    .hero-art:after{
+      content:"FW / 26";
+      position:absolute;
+      right:25px;
+      bottom:25px;
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .hero-placeholder{
+      width:70%;
+      height:76%;
+      border:1px solid rgba(0,0,0,.18);
+      background:rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:30px;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .ticker{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+      background:#e8e3d8;
+    }
+    .ticker-track{
+      width:max-content;
+      display:flex;
+      gap:34px;
+      padding:14px 0;
+      animation:ticker 22s linear infinite;
+    }
+    .ticker span{
+      font-size:11px;
+      letter-spacing:.17em;
+      text-transform:uppercase;
+    }
+    .dot{font-size:8px}
+    @keyframes ticker{
+      to{transform:translateX(-50%)}
+    }
+
+    section{
+      max-width:var(--max);
+      margin:auto;
+      padding:90px 24px;
+    }
+
+    .section-head{
+      display:grid;
+      grid-template-columns:100px 1fr auto;
+      gap:20px;
+      align-items:end;
+      border-bottom:1px solid var(--ink);
+      padding-bottom:17px;
+      margin-bottom:28px;
+    }
+    .section-number{
+      font-size:11px;
+      color:var(--muted);
+      letter-spacing:.08em;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:clamp(42px,7vw,94px);
+      line-height:.8;
+      letter-spacing:-.07em;
+      text-transform:uppercase;
+    }
+    .section-head p{
+      margin:0;
+      max-width:260px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      border-left:1px solid var(--line);
+      border-top:1px solid var(--line);
+    }
+    .category{
+      min-height:250px;
+      border-right:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:var(--paper);
+      transition:.2s ease;
+    }
+    .category:hover{background:#111;color:#fff}
+    .category small{
+      font-size:9px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .category strong{
+      font-size:clamp(28px,3.5vw,55px);
+      letter-spacing:-.06em;
+      line-height:.9;
+      text-transform:uppercase;
+    }
+    .arrow{font-size:20px}
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    .product{
+      background:var(--paper);
+      min-width:0;
+      position:relative;
+    }
+    .product-image{
+      aspect-ratio:4/5;
+      background:
+        linear-gradient(145deg,rgba(0,0,0,.05),rgba(0,0,0,.12)),
+        repeating-linear-gradient(45deg,#ded9ce 0,#ded9ce 2px,#d7d1c5 2px,#d7d1c5 4px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .product-image span{
+      border:1px solid rgba(0,0,0,.3);
+      padding:12px;
+      font-size:9px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      transform:rotate(-5deg);
+    }
+    .product-info{
+      padding:14px 2px 4px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:11px;
+    }
+    .product-name{
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .product-price{white-space:nowrap}
+    .tag{
+      position:absolute;
+      top:10px;
+      left:10px;
+      background:var(--red);
+      color:#fff;
+      padding:6px 8px;
+      font-size:8px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      z-index:2;
+    }
+
+    .product-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .product-image span{color:#777;background:transparent}
+
+    .drop{
+      max-width:none;
+      background:var(--black);
+      color:#fff;
+      padding:110px max(24px,calc((100vw - var(--max))/2 + 24px));
+      position:relative;
+      overflow:hidden;
+    }
+    .drop-inner{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:end;
+    }
+    .drop h2{
+      font-size:clamp(65px,11vw,170px);
+      line-height:.74;
+      letter-spacing:-.09em;
+      margin:15px 0 35px;
+      text-transform:uppercase;
+    }
+    .drop-copy{
+      color:#aaa69e;
+      max-width:500px;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      border-top:1px solid #444;
+      border-bottom:1px solid #444;
+      margin:30px 0;
+    }
+    .count{
+      padding:22px 10px;
+      border-right:1px solid #333;
+      text-align:center;
+    }
+    .count:last-child{border-right:0}
+    .count strong{
+      display:block;
+      font-size:clamp(32px,4vw,62px);
+      line-height:1;
+      letter-spacing:-.06em;
+    }
+    .count span{
+      color:#777;
+      display:block;
+      margin-top:8px;
+      font-size:8px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .signup{
+      display:flex;
+      border-bottom:1px solid #777;
+      max-width:520px;
+    }
+    .signup input{
+      flex:1;
+      min-width:0;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:#fff;
+      padding:16px 0;
+      font-size:11px;
+      text-transform:uppercase;
+    }
+    .signup button{
+      border:0;
+      background:none;
+      color:#fff;
+      cursor:pointer;
+      padding:0 0 0 20px;
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .drop-art{
+      min-height:500px;
+      border:1px solid #333;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      background:
+        radial-gradient(circle at 50% 50%,rgba(179,29,37,.42),transparent 35%),
+        repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 5px);
+    }
+    .drop-art strong{
+      font-size:clamp(80px,13vw,190px);
+      letter-spacing:-.1em;
+      transform:rotate(-90deg);
+      opacity:.9;
+    }
+
+    .editorial{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .editorial-card{
+      min-height:520px;
+      background:#d1cabd;
+      position:relative;
+      overflow:hidden;
+      padding:22px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .editorial-card:nth-child(2){background:#b5aa98}
+    .editorial-card:before{
+      content:"VISION / 35MM";
+      position:absolute;
+      top:22px;
+      left:22px;
+      font-size:9px;
+      letter-spacing:.16em;
+    }
+    .editorial-card h3{
+      margin:0;
+      font-size:clamp(40px,6vw,85px);
+      line-height:.8;
+      letter-spacing:-.07em;
+      text-transform:uppercase;
+    }
+
+    .showroom{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:12px;
+    }
+    .showroom-copy{
+      background:#111;
+      color:#fff;
+      min-height:530px;
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .showroom-copy h2{
+      margin:0;
+      font-size:clamp(50px,7vw,100px);
+      line-height:.78;
+      letter-spacing:-.08em;
+      text-transform:uppercase;
+    }
+    .showroom-copy p{
+      max-width:380px;
+      color:#aaa;
+      font-size:12px;
+      line-height:1.6;
+    }
+    .showroom-photo{
+      min-height:530px;
+      background:
+        linear-gradient(135deg,#aaa093,#70695e);
+      position:relative;
+    }
+    .showroom-photo:after{
+      content:"RACK 01 / RACK 02 / ARCHIVE";
+      position:absolute;
+      left:22px;
+      bottom:22px;
+      font-size:9px;
+      letter-spacing:.14em;
+    }
+
+    .events{
+      border-top:1px solid var(--ink);
+    }
+    .event-row{
+      display:grid;
+      grid-template-columns:100px 1fr auto;
+      align-items:center;
+      gap:20px;
+      padding:28px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .event-row strong{
+      font-size:clamp(30px,4vw,60px);
+      letter-spacing:-.06em;
+      text-transform:uppercase;
+    }
+    .event-row p{
+      margin:0;
+      max-width:380px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    footer{
+      background:#111;
+      color:#fff;
+      padding:65px 24px 25px;
+    }
+    .footer-grid{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:35px;
+    }
+    .footer-brand{
+      font-size:clamp(45px,7vw,100px);
+      line-height:.75;
+      letter-spacing:-.08em;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+    footer h4{
+      margin:0 0 16px;
+      color:#777;
+      font-size:9px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    footer a{
+      display:block;
+      font-size:11px;
+      margin:10px 0;
+      color:#ddd;
+    }
+    .footer-bottom{
+      max-width:var(--max);
+      margin:70px auto 0;
+      padding-top:15px;
+      border-top:1px solid #333;
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      color:#666;
+      font-size:9px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .cart-panel{
+      position:fixed;
+      inset:0 0 0 auto;
+      width:min(420px,100%);
+      background:#f5f2eb;
+      z-index:100;
+      transform:translateX(100%);
+      transition:.3s ease;
+      border-left:1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+    }
+    .cart-panel.open{transform:translateX(0)}
+    .cart-head{
+      padding:20px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .cart-head strong{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+    .close{
+      border:0;
+      background:none;
+      cursor:pointer;
+      font-size:20px;
+    }
+    .cart-items{
+      flex:1;
+      overflow:auto;
+      padding:20px;
+    }
+    .empty{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .cart-item{
+      display:grid;
+      grid-template-columns:70px 1fr auto;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .cart-thumb{
+      aspect-ratio:1;
+      background:#ddd7ca;
+    }
+    .cart-item small{display:block;color:var(--muted);margin-top:5px}
+    .remove{
+      border:0;
+      background:none;
+      cursor:pointer;
+      text-decoration:underline;
+      font-size:9px;
+    }
+    .cart-foot{
+      padding:20px;
+      border-top:1px solid var(--line);
+    }
+    .total{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:15px;
+      font-size:13px;
+      text-transform:uppercase;
+    }
+    .checkout{
+      width:100%;
+      border:1px solid #111;
+      background:#111;
+      color:#fff;
+      padding:15px;
+      cursor:pointer;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:10px;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translate(-50%,20px);
+      opacity:0;
+      pointer-events:none;
+      background:#111;
+      color:#fff;
+      padding:12px 16px;
+      font-size:10px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      z-index:200;
+      transition:.25s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    @media(max-width:900px){
+      .nav{
+        grid-template-columns:auto 1fr auto;
+        min-height:64px;
+      }
+      .nav-left{display:none}
+      .menu-btn{display:block}
+      .nav-right{gap:10px}
+      .brand{justify-self:center}
+      .hero{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+      .hero-copy,.hero-art{min-height:500px}
+      .categories,.products{grid-template-columns:repeat(2,1fr)}
+      .drop-inner,.showroom{grid-template-columns:1fr}
+      .drop-art{min-height:360px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:600px){
+      .topbar{font-size:8px}
+      .nav{padding:0 15px}
+      .brand,.brand img{width:115px}
+      .hero{padding:15px}
+      .hero-copy{min-height:520px;padding:28px}
+      h1{font-size:67px}
+      .hero-bottom{flex-direction:column;align-items:flex-start}
+      section{padding:65px 15px}
+      .section-head{grid-template-columns:45px 1fr}
+      .section-head p{grid-column:2}
+      .section-head a{grid-column:2}
+      .categories,.products{grid-template-columns:1fr 1fr}
+      .category{min-height:180px;padding:14px}
+      .product-info{font-size:9px}
+      .drop{padding:75px 15px}
+      .drop-inner{gap:35px}
+      .countdown{grid-template-columns:repeat(2,1fr)}
+      .count{border-bottom:1px solid #333}
+      .editorial{grid-template-columns:1fr}
+      .editorial-card{min-height:390px}
+      .event-row{grid-template-columns:45px 1fr}
+      .event-row a{grid-column:2}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .footer-brand{grid-column:1/-1}
+      .footer-bottom{flex-direction:column}
+    }
+  .logo-text{display:inline-block;color:#fff;font-weight:900;letter-spacing:-.04em;font-size:clamp(18px,2vw,28px);line-height:1}.placeholder-art{width:100%;height:100%;min-height:320px;display:grid;place-items:center;background:#151515;color:#444;font-size:28px;font-weight:900}.placeholder-art span{transform:rotate(-7deg)}
+</style>
+</head>
+
+<body>
+  <div class="topbar">
+    ENVÍOS A TODO EL PAÍS · TODOS LOS MÉTODOS DE PAGO · CUOTAS SIN INTERÉS · DROPS · PRENDAS ÚNICAS · OFERTAS
+  </div>
+
+  <header>
+    <nav class="nav">
+      <button class="menu-btn" onclick="document.getElementById('categorias').scrollIntoView()">Menú</button>
+
+      <div class="nav-left">
+        <a href="#categorias">Shop</a>
+        <a href="#destacados">Destacados</a>
+        <a href="#drop">Drops</a>
+      </div>
+
+      <a class="brand" href="#">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Pilchalacone">
+      </a>
+
+      <div class="nav-right">
+        <a href="#contacto">Contacto</a>
+        <a href="admin.html">Admin</a>
+        <a href="#" id="cartLink">Carrito <span id="cartCount">0</span> →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Pilchalacone / Streetwear & Archive</div>
+
+        <h1>PILCHA<br>LACONE</h1>
+
+        <div class="hero-bottom">
+          <p>
+            Prendas seleccionadas, streetwear y piezas únicas.
+            Un archivo pensado para quienes buscan algo distinto.
+          </p>
+          <a class="outline-btn" href="#destacados">Explorar colección →</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-placeholder">
+          Acá va la foto principal de la tienda<br>
+          — la reemplazamos cuando me pases las fotos —
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>PILCHALACONE</span><span class="dot">✦</span>
+        <span>STREETWEAR</span><span class="dot">✦</span>
+        <span>VINTAGE</span><span class="dot">✦</span>
+        <span>PRENDAS ÚNICAS</span><span class="dot">✦</span>
+        <span>DROPS</span><span class="dot">✦</span>
+        <span>PILCHALACONE</span><span class="dot">✦</span>
+        <span>STREETWEAR</span><span class="dot">✦</span>
+        <span>VINTAGE</span><span class="dot">✦</span>
+        <span>PRENDAS ÚNICAS</span><span class="dot">✦</span>
+        <span>DROPS</span><span class="dot">✦</span>
+      </div>
+    </div>
+
+    <section id="categorias">
+      <div class="section-head">
+        <div class="section-number">[01] / Categorías</div>
+        <h2>Explorá</h2>
+        <p>Colección completa de Pilchalacone.</p>
+      </div>
+
+      <div class="categories">
+        <a class="category" href="#destacados">
+          <small>01 / Shop</small>
+          <strong>Camperas</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>02 / Shop</small>
+          <strong>Buzos</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>03 / Shop</small>
+          <strong>Remeras</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>04 / Shop</small>
+          <strong>Pantalones</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>05 / Shop</small>
+          <strong>Zapatillas</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>06 / Shop</small>
+          <strong>Accesorios</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>07 / Shop</small>
+          <strong>Jerseys</strong>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="category" href="#destacados">
+          <small>08 / Shop</small>
+          <strong>Todo</strong>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="destacados">
+      <div class="section-head">
+        <div class="section-number">[02] / Curaduría</div>
+        <h2>Destacados</h2>
+        <p>Lo mejor del archivo, elegido a mano.</p>
+        <a class="outline-btn" href="#destacados">Ver todo →</a>
+      </div>
+
+      <div class="products">
+        <article class="product">
+          <div class="product-image"><span>Foto producto 01</span></div>
+          <div class="product-info"><span class="product-name">Producto destacado 01</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto producto 02</span></div>
+          <div class="product-info"><span class="product-name">Producto destacado 02</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto producto 03</span></div>
+          <div class="product-info"><span class="product-name">Producto destacado 03</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto producto 04</span></div>
+          <div class="product-info"><span class="product-name">Producto destacado 04</span><span class="product-price">$00.000</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ofertas">
+      <div class="section-head">
+        <div class="section-number">[03] / Sale</div>
+        <h2>Ofertas</h2>
+        <p>Piezas rebajadas — cuando se van, no vuelven.</p>
+        <a class="outline-btn" href="#ofertas">Ver todas →</a>
+      </div>
+
+      <div class="products">
+        <article class="product">
+          <span class="tag">Sale</span>
+          <div class="product-image"><span>Foto oferta 01</span></div>
+          <div class="product-info"><span class="product-name">Oferta 01</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <span class="tag">Sale</span>
+          <div class="product-image"><span>Foto oferta 02</span></div>
+          <div class="product-info"><span class="product-name">Oferta 02</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <span class="tag">Sale</span>
+          <div class="product-image"><span>Foto oferta 03</span></div>
+          <div class="product-info"><span class="product-name">Oferta 03</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <span class="tag">Sale</span>
+          <div class="product-image"><span>Foto oferta 04</span></div>
+          <div class="product-info"><span class="product-name">Oferta 04</span><span class="product-price">$00.000</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="novedades">
+      <div class="section-head">
+        <div class="section-number">[04] / Just dropped</div>
+        <h2>Novedades</h2>
+        <p>Recién sumadas al archivo.</p>
+        <a class="outline-btn" href="#novedades">Ver todas →</a>
+      </div>
+
+      <div class="products">
+        <article class="product">
+          <div class="product-image"><span>Foto novedad 01</span></div>
+          <div class="product-info"><span class="product-name">Novedad 01</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto novedad 02</span></div>
+          <div class="product-info"><span class="product-name">Novedad 02</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto novedad 03</span></div>
+          <div class="product-info"><span class="product-name">Novedad 03</span><span class="product-price">$00.000</span></div>
+        </article>
+        <article class="product">
+          <div class="product-image"><span>Foto novedad 04</span></div>
+          <div class="product-info"><span class="product-name">Novedad 04</span><span class="product-price">$00.000</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="drop" id="drop">
+      <div class="drop-inner">
+        <div>
+          <div class="eyebrow">Members only / Coming soon</div>
+          <h2>Próximo<br>Drop</h2>
+          <p class="drop-copy">
+            Acceso anticipado a prendas y precios exclusivos.
+            Dejanos tu WhatsApp o email y te mandamos el acceso al próximo drop.
+          </p>
+
+          <div class="countdown">
+            <div class="count"><strong id="days">00</strong><span>Días</span></div>
+            <div class="count"><strong id="hours">00</strong><span>Horas</span></div>
+            <div class="count"><strong id="minutes">00</strong><span>Min</span></div>
+            <div class="count"><strong id="seconds">00</strong><span>Seg</span></div>
+          </div>
+
+          <form class="signup" onsubmit="subscribe(event)">
+            <input type="text" placeholder="Tu WhatsApp o email" required>
+            <button type="submit">Quiero el acceso →</button>
+          </form>
+        </div>
+
+        <div class="drop-art">
+          <strong>P</strong>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div class="section-number">[05] / Vision</div>
+        <h2>Archivo<br>Audiovisual</h2>
+        <p>La identidad visual de Pilchalacone.</p>
+        <a class="outline-btn" href="#contacto">Ver portfolio →</a>
+      </div>
+
+      <div class="editorial">
+        <div class="editorial-card"><h3>35MM<br>Archive</h3></div>
+        <div class="editorial-card"><h3>Street<br>Culture</h3></div>
+      </div>
+    </section>
+
+    <section id="showroom">
+      <div class="section-head">
+        <div class="section-number">[06] / Espacio</div>
+        <h2>Showroom</h2>
+        <p>El espacio físico de Pilchalacone.</p>
+      </div>
+
+      <div class="showroom">
+        <div class="showroom-copy">
+          <div>
+            <div class="eyebrow">Pilchalacone HQ</div>
+            <h2>Visitanos<br>en persona</h2>
+          </div>
+          <div>
+            <p>
+              Esta sección queda preparada para agregar dirección,
+              horarios, fotos del showroom y un botón para reservar visita.
+            </p>
+            <a class="outline-btn" href="#contacto">Agendar visita →</a>
+          </div>
+        </div>
+        <div class="showroom-photo"></div>
+      </div>
+    </section>
+
+    <section id="eventos">
+      <div class="section-head">
+        <div class="section-number">[07] / Agenda</div>
+        <h2>Eventos</h2>
+        <p>Pop-ups, lanzamientos y experiencias.</p>
+      </div>
+
+      <div class="events">
+        <div class="event-row">
+          <span class="section-number">01</span>
+          <div>
+            <strong>Próximamente</strong>
+            <p>Acá aparecerán los próximos eventos y lanzamientos de Pilchalacone.</p>
+          </div>
+          <a class="outline-btn" href="#contacto">Registrarme →</a>
+        </div>
+        <div class="event-row">
+          <span class="section-number">02</span>
+          <div>
+            <strong>Pop-up</strong>
+            <p>Espacio reservado para anunciar futuras experiencias presenciales.</p>
+          </div>
+          <a class="outline-btn" href="#contacto">Info →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="footer-grid">
+      <div class="footer-brand">PILCHA<br>LACONE</div>
+
+      <div>
+        <h4>Shop</h4>
+        <a href="#destacados">Todo</a>
+        <a href="#categorias">Camperas</a>
+        <a href="#categorias">Remeras</a>
+        <a href="#categorias">Buzos</a>
+        <a href="#categorias">Pantalones</a>
+      </div>
+
+      <div>
+        <h4>Info</h4>
+        <a href="#">Envíos</a>
+        <a href="#">Cambios</a>
+        <a href="#">Autenticidad</a>
+        <a href="#">FAQ</a>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <a href="#">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="mailto:pilchalacone@gmail.com">Email</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Pilchalacone</span>
+      <span>Buenos Aires / Argentina</span>
+    </div>
+  </footer>
+
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-head">
+      <strong>Carrito <span id="cartCountPanel">0</span></strong>
+      <button class="close" id="closeCart">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <p class="empty">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="cart-foot">
+      <div class="total">
+        <span>Total</span>
+        <strong id="cartTotal">$0</strong>
+      </div>
+      <button class="checkout" onclick="checkout()">Continuar compra →</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://ynooeiurzzlslgalvsam.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_BueorNHT6XsXd6FitLVx6Q_i4DDDHrz';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    function escapeHtmlStore(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+    function moneyStore(v){return '$'+Number(v||0).toLocaleString('es-AR');}
+    function productCardStore(p){
+      const img=p.images?.[0]||'';
+      const tags=[...(p.tags||[]).slice(0,2),p.sale?'Sale':'',p.featured?'Destacado':''].filter(Boolean);
+      return `<article class="product" data-product-id="${escapeHtmlStore(p.id)}">${tags.length?`<span class="tag">${escapeHtmlStore(tags[0])}</span>`:''}<div class="product-image">${img?`<img src="${escapeHtmlStore(img)}" alt="${escapeHtmlStore(p.name)}" loading="lazy">`:'<span>Sin foto</span>'}</div><div class="product-info"><span class="product-name">${escapeHtmlStore(p.name)}</span><span class="product-price">${moneyStore(p.price)}</span></div></article>`;
+    }
+    async function loadStoreProducts(){
+      try{
+        const {data,error}=await supabaseClient.from('products').select('*').order('created_at',{ascending:false});
+        if(error) throw error;
+        const all=data||[], featured=all.filter(p=>p.featured), sale=all.filter(p=>p.sale), latest=all.slice(0,4);
+        const grids=document.querySelectorAll('#destacados .products,#ofertas .products,#novedades .products');
+        const sets=[featured.slice(0,4),sale.slice(0,4),latest];
+        grids.forEach((grid,i)=>{const list=sets[i]||[];grid.innerHTML=list.length?list.map(productCardStore).join(''):'<div style="grid-column:1/-1;padding:35px 0;color:#999;font-size:12px">Todavía no hay productos en esta sección.</div>';});
+      }catch(err){console.error('Supabase:',err);}
+    }
+    loadStoreProducts();
+
+  <script>
+    // ===== CARRITO DEMO =====
+    // Cuando tengamos los productos reales, esta parte se conecta
+    // con el catálogo definitivo.
+
+    const cart = [];
+    const cartPanel = document.getElementById('cartPanel');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartCountPanel = document.getElementById('cartCountPanel');
+    const cartTotal = document.getElementById('cartTotal');
+
+    document.getElementById('cartLink').addEventListener('click', e => {
+      e.preventDefault();
+      cartPanel.classList.add('open');
+    });
+
+    document.getElementById('closeCart').addEventListener('click', () => {
+      cartPanel.classList.remove('open');
+    });
+
+    function addDemoProduct(name, price){
+      cart.push({name, price});
+      renderCart();
+      showToast('Producto agregado al carrito');
+      cartPanel.classList.add('open');
+    }
+
+    function renderCart(){
+      cartCount.textContent = cart.length;
+      cartCountPanel.textContent = cart.length;
+
+      if(!cart.length){
+        cartItems.innerHTML = '<p class="empty">Tu carrito está vacío.</p>';
+        cartTotal.textContent = '$0';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map((item,index) => `
+        <div class="cart-item">
+          <div class="cart-thumb"></div>
+          <div>
+            <strong>${item.name}</strong>
+            <small>$${item.price.toLocaleString('es-AR')}</small>
+          </div>
+          <button class="remove" onclick="removeItem(${index})">Eliminar</button>
+        </div>
+      `).join('');
+
+      cartTotal.textContent =
+        '$' + cart.reduce((sum,item) => sum + item.price,0).toLocaleString('es-AR');
+    }
+
+    function removeItem(index){
+      cart.splice(index,1);
+      renderCart();
+    }
+
+    function checkout(){
+      if(!cart.length){
+        showToast('El carrito está vacío');
+        return;
+      }
+      showToast('Checkout pendiente de configurar');
+    }
+
+    function subscribe(e){
+      e.preventDefault();
+      e.target.reset();
+      showToast('¡Listo! Te vamos a avisar del próximo drop.');
+    }
+
+    function showToast(text){
+      const toast = document.getElementById('toast');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ===== CONTADOR =====
+    // Fecha provisoria. La cambiamos por la fecha real del próximo drop.
+    const dropDate = new Date();
+    dropDate.setDate(dropDate.getDate() + 12);
+
+    function updateCountdown(){
+      const diff = Math.max(0, dropDate - new Date());
+
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff / 3600000) % 24);
+      const minutes = Math.floor((diff / 60000) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = String(days).padStart(2,'0');
+      document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown,1000);
+
+    // ===== PRODUCTOS DEMO =====
+    // Al pasar a productos reales, cada tarjeta podrá llamar a:
+    // addDemoProduct('Nombre del producto', 50000)
+  </script>
+</body>
+</html>
