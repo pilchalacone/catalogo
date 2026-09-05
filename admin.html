@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — PILCHALACONE</title>
+  <style>
+    :root{--bg:#090909;--panel:#111;--panel2:#161616;--ink:#f5f5f5;--muted:#969696;--line:#292929;--accent:#fff;--danger:#d9363e;--ok:#72d572}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    button,input,textarea,select{font:inherit} a{color:inherit;text-decoration:none}
+    .hidden{display:none!important}.wrap{max-width:1500px;margin:auto;padding:28px}
+    .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:8px 0 22px;gap:20px}
+    .brand{font-weight:900;letter-spacing:-.06em;font-size:28px}.top-right{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:12px}
+    .btn{border:1px solid var(--line);background:transparent;color:var(--ink);padding:11px 15px;cursor:pointer;text-transform:uppercase;font-size:10px;letter-spacing:.1em}.btn:hover{background:#fff;color:#000}.btn.danger{border-color:#542326;color:#ff8d92}.btn.danger:hover{background:var(--danger);color:#fff}
+    .login{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(440px,100%);border:1px solid var(--line);background:var(--panel);padding:34px}.login-card h1{font-size:42px;line-height:.9;letter-spacing:-.07em;margin:0 0 10px;text-transform:uppercase}.eyebrow{font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:22px}.error{color:#ff7e84;font-size:12px;margin-top:12px;min-height:18px}
+    label{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}input,textarea,select{width:100%;border:1px solid var(--line);background:#0b0b0b;color:var(--ink);padding:12px;outline:none}input:focus,textarea:focus,select:focus{border-color:#777}textarea{min-height:110px;resize:vertical}.field{margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:28px}.panel{border:1px solid var(--line);background:var(--panel);padding:22px}.panel h2{margin:0 0 20px;font-size:20px;letter-spacing:-.03em;text-transform:uppercase}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}.checks{display:flex;flex-wrap:wrap;gap:12px}.check{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 12px;color:var(--ink);font-size:11px}.check input{width:auto}
+    .upload{border:1px dashed #555;padding:20px;text-align:center;margin-bottom:12px}.upload strong{display:block;margin-bottom:5px}.upload small{color:var(--muted)}.preview{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.preview-item{position:relative;aspect-ratio:1;overflow:hidden;background:#080808;border:1px solid var(--line)}.preview-item img{width:100%;height:100%;object-fit:cover}.preview-item button{position:absolute;top:5px;right:5px;border:0;background:#000;color:#fff;width:26px;height:26px;cursor:pointer}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.primary{background:#fff;color:#000;border-color:#fff}.primary:hover{background:#ddd}.status{min-height:18px;color:var(--muted);font-size:11px;margin-top:10px}
+    .list{margin-top:22px}.product-row{display:grid;grid-template-columns:70px 1.25fr 1fr 1fr auto;gap:14px;align-items:center;border-top:1px solid var(--line);padding:13px 0}.thumb{width:70px;height:82px;background:#0a0a0a;overflow:hidden;border:1px solid var(--line)}.thumb img{width:100%;height:100%;object-fit:cover}.meta strong{display:block;text-transform:uppercase;font-size:12px}.meta small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.price-old{color:var(--muted);text-decoration:line-through;font-size:11px}.price-new{font-weight:700}.row-actions{display:flex;gap:7px}.empty{color:var(--muted);padding:25px 0;font-size:12px}
+    .toast{position:fixed;right:20px;bottom:20px;background:#fff;color:#000;padding:13px 16px;font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.2s}.toast.show{transform:none;opacity:1}
+    @media(max-width:950px){.grid{grid-template-columns:1fr}.product-row{grid-template-columns:60px 1fr;gap:10px}.product-row>div:nth-child(3),.product-row>div:nth-child(4){display:none}.row-actions{grid-column:2}.thumb{width:60px;height:70px}}
+    @media(max-width:620px){.wrap{padding:16px}.top{align-items:flex-start;flex-direction:column}.top-right{width:100%;justify-content:space-between}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.preview{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+  <section id="loginView" class="login">
+    <div class="login-card">
+      <div class="eyebrow">PILCHALACONE / ADMIN</div>
+      <h1>Panel<br>Admin</h1>
+      <p style="color:var(--muted);font-size:12px;line-height:1.5">Ingresá con la cuenta administradora de Supabase.</p>
+      <form id="loginForm">
+        <div class="field"><label>Email</label><input id="email" type="email" autocomplete="username" required></div>
+        <div class="field"><label>Contraseña</label><input id="password" type="password" autocomplete="current-password" required></div>
+        <button class="btn primary" style="width:100%" type="submit">Iniciar sesión →</button>
+        <div id="loginError" class="error"></div>
+      </form>
+      <a class="btn" style="display:block;text-align:center;margin-top:12px" href="index.html">← Volver a la tienda</a>
+    </div>
+  </section>
+
+  <section id="adminView" class="hidden">
+    <div class="wrap">
+      <header class="top">
+        <a class="brand" href="index.html">PILCHALACONE</a>
+        <div class="top-right"><span id="userEmail"></span><a href="index.html">VER TIENDA ↗</a><button id="logout" class="btn danger">Cerrar sesión</button></div>
+      </header>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="eyebrow" id="formMode">Nuevo producto</div>
+          <h2 id="formTitle">Agregar producto</h2>
+          <form id="productForm">
+            <input id="productId" type="hidden">
+            <div class="form-grid">
+              <div class="field full"><label>Nombre</label><input id="name" required placeholder="Ej. Nike Vintage Track Jacket"></div>
+              <div class="field"><label>Precio</label><input id="price" type="number" min="0" step="0.01" placeholder="85000"></div>
+              <div class="field"><label>Categoría</label><select id="category"><option>Camperas</option><option>Buzos</option><option>Rompeviento</option><option>Pantalones</option><option>Shorts</option><option>Zapatillas</option><option>Todo</option></select></div>
+              <div class="field full"><label>Talles</label><input id="sizes" placeholder="S, M, L, XL"></div>
+              <div class="field full"><label>Visibilidad</label><div class="checks"><label class="check"><input id="sale" type="checkbox"> Ofertas</label><label class="check"><input id="newest" type="checkbox"> Novedades</label><label class="check"><input id="featured" type="checkbox"> Destacados</label></div></div>
+              <div id="salePrices" class="field full hidden"><div class="form-grid"><div class="field"><label>Precio viejo</label><input id="oldPrice" type="number" min="0" step="0.01" placeholder="100000"></div><div class="field"><label>Precio nuevo</label><input id="newPrice" type="number" min="0" step="0.01" placeholder="85000"></div></div></div>
+              <div class="field full">
+                <label>Imágenes</label>
+                <div class="upload"><strong>Subí las fotos del producto</strong><small>JPG, PNG, WEBP o AVIF · podés seleccionar varias</small><input id="images" type="file" accept="image/jpeg,image/png,image/webp,image/avif,.avif" multiple style="margin-top:14px"></div>
+                <div id="preview" class="preview"></div>
+              </div>
+            </div>
+            <div class="actions"><button class="btn primary" type="submit" id="saveBtn">Guardar producto →</button><button class="btn hidden" type="button" id="cancelEdit">Cancelar edición</button></div>
+            <div id="formStatus" class="status"></div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="eyebrow">Catálogo</div>
+          <h2>Productos</h2>
+          <div id="productList" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://ynooeiurzzlslgalvsam.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_BueorNHT6XsXd6FitLVx6Q_i4DDDHrz';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const $ = id => document.getElementById(id);
+    let currentUser = null;
+    let products = [];
+    let existingImages = [];
+    let newFiles = [];
+
+    function toast(text){ const el=$('toast'); el.textContent=text; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2600); }
+    function money(v){ return '$' + Number(v||0).toLocaleString('es-AR'); }
+    function splitList(v){ return v.split(',').map(x=>x.trim()).filter(Boolean); }
+    function safeName(name){ return name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9._-]+/g,'-').toLowerCase(); }
+
+    async function boot(){
+      const {data:{session}} = await supabaseClient.auth.getSession();
+      if(session) showAdmin(session.user); else showLogin();
+      supabaseClient.auth.onAuthStateChange((_event, session)=>{ if(session) showAdmin(session.user); else showLogin(); });
+    }
+    function showLogin(){ $('loginView').classList.remove('hidden'); $('adminView').classList.add('hidden'); currentUser=null; }
+    async function showAdmin(user){
+      currentUser=user; $('loginView').classList.add('hidden'); $('adminView').classList.remove('hidden'); $('userEmail').textContent=user.email||'';
+      await loadProducts();
+    }
+
+    $('loginForm').addEventListener('submit', async e=>{
+      e.preventDefault(); $('loginError').textContent='';
+      const {error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+      if(error) $('loginError').textContent='No se pudo iniciar sesión: '+error.message;
+    });
+    $('logout').addEventListener('click', async()=>{ await supabaseClient.auth.signOut(); });
+
+    async function loadProducts(){
+      const {data,error}=await supabaseClient.from('products').select('*').order('created_at',{ascending:false});
+      if(error){ $('productList').innerHTML='<div class="empty">Error cargando productos: '+escapeHtml(error.message)+'</div>'; return; }
+      products=data||[]; renderList();
+    }
+    function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+    function renderList(){
+      if(!products.length){$('productList').innerHTML='<div class="empty">Todavía no hay productos. Creá el primero desde el formulario.</div>';return;}
+      $('productList').innerHTML=products.map(p=>{
+        const img=p.images?.[0]||'';
+        const flags=[p.sale?'Oferta':'',p.newest?'Novedad':'',p.featured?'Destacado':''].filter(Boolean).join(' · ');
+        const priceHtml=p.sale
+          ? `<span class="price-old">${money(p.old_price)}</span><br><span class="price-new">${money(p.new_price ?? p.price)}</span>`
+          : `<span class="price-new">${money(p.price)}</span>`;
+        return `<div class="product-row"><div class="thumb">${img?`<img src="${escapeHtml(img)}" alt="">`:''}</div><div class="meta"><strong>${escapeHtml(p.name)}</strong><small>${escapeHtml(p.category)}${flags?' · '+escapeHtml(flags):''}</small></div><div><small style="color:var(--muted)">${p.sale?'Precio viejo / nuevo':'Precio'}</small><br>${priceHtml}</div><div><small style="color:var(--muted)">Talles</small><br>${escapeHtml((p.sizes||[]).join(', ')||'—')}</div><div class="row-actions"><button class="btn" onclick="editProduct('${p.id}')">Editar</button><button class="btn danger" onclick="deleteProduct('${p.id}')">Borrar</button></div></div>`;
+      }).join('');
+    }
+
+    $('images').addEventListener('change',()=>{ newFiles=[...$('images').files]; renderPreview(); });
+    function renderPreview(){
+      const current=existingImages.map((url,i)=>`<div class="preview-item"><img src="${escapeHtml(url)}" alt=""><button type="button" onclick="removeExistingImage(${i})">×</button></div>`).join('');
+      const fresh=newFiles.map((file,i)=>`<div class="preview-item"><img src="${URL.createObjectURL(file)}" alt=""><button type="button" onclick="removeNewFile(${i})">×</button></div>`).join('');
+      $('preview').innerHTML=current+fresh;
+    }
+    window.removeExistingImage=i=>{existingImages.splice(i,1);renderPreview();};
+    window.removeNewFile=i=>{newFiles.splice(i,1);renderPreview();};
+
+    async function uploadFiles(productId){
+      const urls=[];
+      for(let i=0;i<newFiles.length;i++){
+        const file=newFiles[i];
+        const path=`${productId}/${Date.now()}-${i}-${safeName(file.name)}`;
+        const {error}=await supabaseClient.storage.from('products').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});
+        if(error) throw error;
+        const {data}=supabaseClient.storage.from('products').getPublicUrl(path);
+        urls.push(data.publicUrl);
+      }
+      return urls;
+    }
+
+    function toggleSalePrices(){
+      $('salePrices').classList.toggle('hidden', !$('sale').checked);
+      $('oldPrice').required=$('sale').checked;
+      $('newPrice').required=$('sale').checked;
+    }
+    $('sale').addEventListener('change', toggleSalePrices);
+    toggleSalePrices();
+
+    $('productForm').addEventListener('submit', async e=>{
+      e.preventDefault();
+      const btn=$('saveBtn'); btn.disabled=true; $('formStatus').textContent='Guardando...';
+      try{
+        const id=$('productId').value || crypto.randomUUID();
+        const uploaded=await uploadFiles(id);
+        const isSale=$('sale').checked;
+        const normalPrice=Number($('price').value||0);
+        const oldPrice=isSale ? Number($('oldPrice').value||0) : null;
+        const newPrice=isSale ? Number($('newPrice').value||0) : null;
+        if(isSale && (!oldPrice || !newPrice)){ throw new Error('Para una oferta completá precio viejo y precio nuevo.'); }
+        const payload={name:$('name').value.trim(),price:isSale?newPrice:normalPrice,category:$('category').value,sizes:splitList($('sizes').value),featured:$('featured').checked,sale:isSale,newest:$('newest').checked,old_price:oldPrice,new_price:newPrice,images:[...existingImages,...uploaded],updated_at:new Date().toISOString()};
+        let result;
+        if($('productId').value){ result=await supabaseClient.from('products').update(payload).eq('id',id).select().single(); }
+        else { result=await supabaseClient.from('products').insert({...payload,id}).select().single(); }
+        if(result.error) throw result.error;
+        toast($('productId').value?'Producto actualizado':'Producto creado'); resetForm(); await loadProducts();
+      }catch(err){ $('formStatus').textContent='Error: '+err.message; toast('No se pudo guardar'); }
+      finally{btn.disabled=false;}
+    });
+
+    window.editProduct=id=>{
+      const p=products.find(x=>x.id===id); if(!p)return;
+      $('productId').value=p.id;$('name').value=p.name||'';$('price').value=p.sale ? (p.new_price??p.price??0) : (p.price??0);$('category').value=p.category||'Todo';$('sizes').value=(p.sizes||[]).join(', ');$('featured').checked=!!p.featured;$('sale').checked=!!p.sale;$('newest').checked=!!p.newest;$('oldPrice').value=p.old_price??'';$('newPrice').value=p.new_price??'';toggleSalePrices();existingImages=[...(p.images||[])];newFiles=[];$('formTitle').textContent='Editar producto';$('formMode').textContent='Edición';$('saveBtn').textContent='Guardar cambios →';$('cancelEdit').classList.remove('hidden');renderPreview();window.scrollTo({top:0,behavior:'smooth'});
+    };
+    $('cancelEdit').addEventListener('click',resetForm);
+    function resetForm(){ $('productForm').reset();$('productId').value='';$('category').value='Camperas';$('newest').checked=false;$('oldPrice').value='';$('newPrice').value='';toggleSalePrices();existingImages=[];newFiles=[];$('preview').innerHTML='';$('formTitle').textContent='Agregar producto';$('formMode').textContent='Nuevo producto';$('saveBtn').textContent='Guardar producto →';$('cancelEdit').classList.add('hidden');$('formStatus').textContent=''; }
+
+    window.deleteProduct=async id=>{
+      const p=products.find(x=>x.id===id); if(!p)return;
+      if(!confirm(`¿Borrar "${p.name}"?`))return;
+      const {error}=await supabaseClient.from('products').delete().eq('id',id);
+      if(error){toast('No se pudo borrar: '+error.message);return;}
+      toast('Producto eliminado'); await loadProducts();
+    };
+
+    boot();
+  </script>
+</body>
+</html>
