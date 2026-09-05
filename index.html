@@ -961,12 +961,12 @@
 
       <div class="categories">
         <a class="category category-photo" href="#camperas" data-category-link="camperas"><img src="hero-pilchalacone.jpg" alt="Camperas"><span class="category-overlay"></span><small>01 / SHOP</small><strong>Camperas</strong><span class="arrow">↗</span></a>
-        <a class="category category-photo" href="#buzos" data-category-link="buzos"><img src="hero-pilchalacone.jpg" alt="Buzos"><span class="category-overlay"></span><small>02 / SHOP</small><strong>Buzos</strong><span class="arrow">↗</span></a>
+        <a class="category category-photo" href="#buzos" data-category-link="buzos"><img src="personaje.jpg" alt="Buzos"><span class="category-overlay"></span><small>02 / SHOP</small><strong>Buzos</strong><span class="arrow">↗</span></a>
         <a class="category category-photo" href="#rompeviento" data-category-link="rompeviento"><img src="hero-pilchalacone.jpg" alt="Rompeviento"><span class="category-overlay"></span><small>03 / SHOP</small><strong>Rompeviento</strong><span class="arrow">↗</span></a>
         <a class="category category-photo" href="#pantalones" data-category-link="pantalones"><img src="hero-pilchalacone.jpg" alt="Pantalones"><span class="category-overlay"></span><small>04 / SHOP</small><strong>Pantalones</strong><span class="arrow">↗</span></a>
         <a class="category category-photo" href="#shorts" data-category-link="shorts"><img src="hero-pilchalacone.jpg" alt="Shorts"><span class="category-overlay"></span><small>05 / SHOP</small><strong>Shorts</strong><span class="arrow">↗</span></a>
         <a class="category category-photo" href="#zapatillas" data-category-link="zapatillas"><img src="hero-pilchalacone.jpg" alt="Zapatillas"><span class="category-overlay"></span><small>06 / SHOP</small><strong>Zapatillas</strong><span class="arrow">↗</span></a>
-        <a class="category category-photo" href="#todo" data-category-link="todo"><img src="hero-pilchalacone.jpg" alt="Todo"><span class="category-overlay"></span><small>07 / SHOP</small><strong>Todo</strong><span class="arrow">↗</span></a>
+        <a class="category category-photo" href="#todo" data-category-link="todo"><img src="personaje.jpg" alt="Todo"><span class="category-overlay"></span><small>07 / SHOP</small><strong>Todo</strong><span class="arrow">↗</span></a>
       </div>
     </section>
 
@@ -1423,8 +1423,8 @@
       cartPanel.classList.remove('open');
     });
 
-    function addDemoProduct(name, price, image = ''){
-      cart.push({name, price, image});
+    function addDemoProduct(name, price){
+      cart.push({name, price});
       renderCart();
       showToast('Producto agregado al carrito');
       cartPanel.classList.add('open');
@@ -1442,9 +1442,8 @@
 
       cartItems.innerHTML = cart.map((item,index) => `
         <div class="cart-item">
-          ${item.image ? `<img src="${escapeHtmlStore(item.image)}" alt="${escapeHtmlStore(item.name)}" class="cart-thumb" style="object-fit:cover;">` : '<div class="cart-thumb"></div>'}
           <div>
-            <strong>${escapeHtmlStore(item.name)}</strong>
+            <strong>${item.name}</strong>
             <small>$${item.price.toLocaleString('es-AR')}</small>
           </div>
           <button class="remove" onclick="removeItem(${index})">Eliminar</button>
@@ -1465,16 +1464,7 @@
         showToast('El carrito está vacío');
         return;
       }
-
-      const phoneNumber = '5491123456789'; // Reemplazar por el número de WhatsApp de la tienda
-      let message = '¡Hola! Quiero realizar la siguiente compra:\n\n';
-      cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - $${item.price.toLocaleString('es-AR')}\n`;
-      });
-      message += `\n*Total:* ${cartTotal.textContent}`;
-
-      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+      showToast('Checkout pendiente de configurar');
     }
 
     function subscribe(e){
