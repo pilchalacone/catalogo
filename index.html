@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PILCHALACONE — Streetwear, vintage y prendas únicas." />
+  <meta name="theme-color" content="#f4f1ea" />
+  <title>PILCHALACONE — Streetwear & Vintage</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root{
+      --bg:#0a0a0a;
+      --paper:#111111;
+      --ink:#f5f5f5;
+      --muted:#999;
+      --line:#292929;
+      --accent:#c51f2a;
+      --black:#050505;
+      --max:1440px;
+      --header:74px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:#000;
+      color:var(--ink);
+      font-family:"DM Sans",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    body.lock{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    img{display:block;max-width:100%}
+
+    .container{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .announcement{
+      min-height:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 16px;
+      background:var(--black);
+      color:#fff;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      text-align:center;
+    }
+
+    /* HEADER */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      height:var(--header);
+      border-bottom:1px solid var(--line);
+      background:rgba(10,10,10,.94);
+      backdrop-filter:blur(12px);
+    }
+    .nav{
+      height:100%;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+    .nav-left,.nav-right{display:flex;align-items:center;gap:22px}
+    .nav-right{justify-content:flex-end}
+    .nav-link{
+      border:0;background:none;padding:0;
+      font-size:11px;font-weight:700;
+      letter-spacing:.1em;text-transform:uppercase;
+    }
+    .nav-link:hover{opacity:.55}
+    .brand{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:22px;font-weight:700;letter-spacing:-.06em;
+      white-space:nowrap;
+    }
+    .cart-button{
+      display:flex;align-items:center;gap:7px;
+      border:0;background:none;padding:0;
+      font-size:11px;font-weight:700;
+      letter-spacing:.1em;text-transform:uppercase;
+    }
+    .cart-count{
+      width:20px;height:20px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--ink);color:#fff;font-size:10px;
+    }
+    .menu-toggle{display:none;border:0;background:none;padding:0;font-size:20px}
+
+    /* HERO */
+    .hero{padding:18px 0 0}
+    .hero-grid{
+      min-height:min(720px,calc(100vh - 105px));
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:var(--black);
+      overflow:hidden;
+    }
+    .hero-copy{
+      padding:clamp(38px,6vw,90px);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .eyebrow{
+      font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+      opacity:.65;
+    }
+    .hero h1{
+      margin:28px 0 20px;
+      max-width:650px;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(48px,7vw,108px);
+      line-height:.86;
+      letter-spacing:-.075em;
+      text-transform:uppercase;
+    }
+    .hero p{
+      max-width:470px;margin:0;
+      font-size:14px;line-height:1.65;color:#c8c8c8;
+    }
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:35px}
+    .btn{
+      min-height:46px;padding:0 20px;
+      border:1px solid currentColor;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      transition:.2s ease;
+    }
+    .btn-light{background:#fff;color:#111;border-color:#fff}
+    .btn-light:hover{background:transparent;color:#fff}
+    .btn-outline-dark{background:transparent;color:#fff;border-color:#fff}
+    .btn-outline-dark:hover{background:#fff;color:#111}
+    .hero-meta{
+      display:flex;gap:30px;flex-wrap:wrap;
+      font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#aaa;
+    }
+
+    .visual{
+      position:relative;min-height:450px;overflow:hidden;
+      background:
+        radial-gradient(circle at 65% 35%,rgba(255,255,255,.14),transparent 23%),
+        linear-gradient(135deg,#292929 0%,#111 48%,#3b3b3b 100%);
+    }
+    .visual:before{
+      content:"";
+      position:absolute;inset:12% 18%;
+      border:1px solid rgba(255,255,255,.2);
+      transform:rotate(-7deg);
+    }
+    .visual:after{
+      content:"PILCHA";
+      position:absolute;left:8%;bottom:5%;
+      font-family:"Space Grotesk";font-size:clamp(60px,10vw,150px);
+      line-height:.8;font-weight:700;letter-spacing:-.09em;
+      color:rgba(255,255,255,.08);
+    }
+    .visual-label{
+      position:absolute;top:24px;right:24px;
+      padding:8px 10px;border:1px solid rgba(255,255,255,.35);
+      color:#fff;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+    }
+
+    /* TICKER */
+    .ticker{
+      overflow:hidden;border-bottom:1px solid var(--line);
+      border-top:1px solid var(--line);margin-top:18px;
+    }
+    .ticker-track{
+      width:max-content;display:flex;gap:34px;padding:14px 0;
+      animation:marquee 25s linear infinite;
+    }
+    .ticker span{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .ticker i{font-style:normal;color:var(--accent)}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+
+    /* SECTION */
+    .section{padding:90px 0 0}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:20px;
+      margin-bottom:26px;
+    }
+    .section-kicker{
+      margin:0 0 7px;font-size:10px;font-weight:700;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    }
+    .section-title{
+      margin:0;font-family:"Space Grotesk";font-size:clamp(30px,4vw,52px);
+      letter-spacing:-.065em;line-height:.95;text-transform:uppercase;
+    }
+    .section-link{
+      color:#fff;
+      font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+      border-bottom:1px solid var(--ink);padding-bottom:4px;
+    }
+
+    /* CATEGORIES */
+    .categories{
+      display:flex;gap:8px;flex-wrap:wrap;
+      padding-bottom:16px;border-bottom:1px solid var(--line);
+    }
+    .cat{
+      border:1px solid var(--line);background:transparent;
+      padding:10px 14px;font-size:10px;font-weight:700;
+      letter-spacing:.09em;text-transform:uppercase;
+    }
+    .cat:hover,.cat.active{background:#fff;border-color:#fff;color:#000}
+
+    /* PRODUCTS */
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .product-card{min-width:0}
+    .product-image{
+      position:relative;aspect-ratio:4/5;overflow:hidden;
+      background:#202020;
+    }
+    .product-image:before{
+      content:"FOTO";
+      position:absolute;inset:0;display:grid;place-items:center;
+      font-family:"Space Grotesk";font-size:34px;font-weight:700;
+      letter-spacing:-.06em;color:rgba(0,0,0,.14);
+    }
+    .product-image:after{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(145deg,transparent 45%,rgba(255,255,255,.16));
+    }
+    .placeholder-2{background:#292929}
+    .placeholder-3{background:#303030}
+    .placeholder-4{background:#252525}
+    .tag{
+      position:absolute;top:10px;left:10px;z-index:2;
+      padding:7px 8px;background:var(--accent);color:#fff;
+      font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .product-info{padding:12px 0 0}
+    .product-name{
+      margin:0 0 5px;font-size:12px;font-weight:700;text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .product-sub{margin:0 0 8px;font-size:10px;color:var(--muted)}
+    .price-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .price{font-size:12px;font-weight:700}
+    .old-price{margin-left:5px;color:#999;text-decoration:line-through;font-weight:400}
+    .quick-add{
+      border:0;background:none;padding:0;
+      font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      text-decoration:underline;text-underline-offset:4px;
+    }
+    .quick-add:hover{color:var(--accent)}
+
+    /* PROMO */
+    .promo{
+      margin-top:90px;background:var(--black);color:#fff;
+      display:grid;grid-template-columns:1fr 1fr;min-height:390px;
+    }
+    .promo-copy{padding:55px;display:flex;flex-direction:column;justify-content:center}
+    .promo h2{
+      margin:12px 0 18px;font-family:"Space Grotesk";
+      font-size:clamp(38px,5vw,70px);line-height:.9;letter-spacing:-.07em;
+      text-transform:uppercase;
+    }
+    .promo p{max-width:450px;color:#aaa;font-size:13px;line-height:1.6}
+    .promo-visual{
+      background:
+        linear-gradient(120deg,rgba(255,255,255,.08),transparent),
+        repeating-linear-gradient(45deg,#242424 0,#242424 2px,#111 2px,#111 12px);
+      display:grid;place-items:center;
+    }
+    .promo-visual strong{
+      font-family:"Space Grotesk";font-size:clamp(50px,8vw,110px);
+      letter-spacing:-.09em;color:rgba(255,255,255,.08);
+    }
+
+    /* INFO STRIP */
+    .info-strip{
+      margin-top:90px;
+      display:grid;grid-template-columns:repeat(4,1fr);
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    }
+    .info-item{padding:28px 18px;border-right:1px solid var(--line)}
+    .info-item:last-child{border-right:0}
+    .info-icon{font-size:18px;margin-bottom:14px}
+    .info-item h3{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+    .info-item p{margin:0;font-size:11px;line-height:1.5;color:var(--muted)}
+
+    /* NEWSLETTER */
+    .newsletter{
+      margin-top:90px;padding:65px 0;
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      text-align:center;
+    }
+    .newsletter h2{
+      margin:8px 0 12px;font-family:"Space Grotesk";
+      font-size:clamp(34px,5vw,65px);letter-spacing:-.07em;text-transform:uppercase;
+    }
+    .newsletter p{margin:0 auto 25px;max-width:500px;color:var(--muted);font-size:12px;line-height:1.6}
+    .signup{max-width:480px;margin:auto;display:flex;border-bottom:1px solid var(--ink)}
+    .signup input{color:#fff;}
+    .signup input::placeholder{color:#666}
+    .signup input{
+      flex:1;border:0;background:transparent;outline:0;padding:13px 0;
+      font-size:12px;min-width:0;
+    }
+    .signup button{
+      border:0;background:none;padding:0 4px;
+      font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    }
+
+    /* FOOTER */
+    footer{padding:65px 0 28px}
+    .footer-grid{
+      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px;
+      padding-bottom:60px;border-bottom:1px solid var(--line);
+    }
+    .footer-brand{
+      font-family:"Space Grotesk";font-size:32px;font-weight:700;
+      letter-spacing:-.07em;text-transform:uppercase;
+    }
+    .footer-desc{max-width:350px;margin-top:14px;color:var(--muted);font-size:11px;line-height:1.6}
+    .footer-col h4{margin:0 0 15px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+    .footer-col a{display:block;margin:0 0 9px;font-size:11px;color:var(--muted)}
+    .footer-col a:hover{color:var(--ink)}
+    .copyright{
+      display:flex;justify-content:space-between;gap:20px;
+      padding-top:20px;font-size:9px;color:var(--muted);
+      text-transform:uppercase;letter-spacing:.1em;
+    }
+
+    /* CART */
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:90;
+      opacity:0;visibility:hidden;transition:.25s;
+    }
+    .overlay.open{opacity:1;visibility:visible}
+    .cart{
+      position:fixed;z-index:100;right:0;top:0;height:100dvh;width:min(440px,100%);
+      background:var(--paper);transform:translateX(100%);transition:.3s ease;
+      display:flex;flex-direction:column;border-left:1px solid var(--line);
+    }
+    .cart.open{transform:translateX(0)}
+    .cart-head{
+      padding:22px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .cart-head h2{margin:0;font-family:"Space Grotesk";font-size:22px;letter-spacing:-.05em;text-transform:uppercase}
+    .close{border:0;background:none;font-size:24px;line-height:1}
+    .cart-items{flex:1;overflow:auto;padding:20px}
+    .empty{text-align:center;padding:70px 20px;color:var(--muted);font-size:12px;line-height:1.6}
+    .cart-item{
+      display:grid;grid-template-columns:75px 1fr auto;gap:12px;
+      padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid var(--line);
+    }
+    .cart-thumb{aspect-ratio:1;background:#d3cec4;display:grid;place-items:center;font-size:9px;color:#777}
+    .cart-item h3{margin:0 0 5px;font-size:11px;text-transform:uppercase}
+    .cart-item p{margin:0 0 10px;font-size:10px;color:var(--muted)}
+    .qty{display:flex;align-items:center;gap:10px}
+    .qty button{border:1px solid var(--line);background:none;width:24px;height:24px}
+    .remove{border:0;background:none;color:var(--muted);font-size:9px;text-decoration:underline}
+    .cart-foot{padding:20px;border-top:1px solid var(--line)}
+    .total-row{display:flex;justify-content:space-between;margin-bottom:14px;font-size:12px;font-weight:700}
+    .checkout{
+      width:100%;height:48px;border:1px solid var(--ink);background:var(--ink);color:#fff;
+      font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    }
+    .checkout:hover{background:#fff;color:#000}
+    .cart-note{margin:10px 0 0;text-align:center;font-size:9px;color:var(--muted);line-height:1.5}
+
+    /* MOBILE MENU */
+    .mobile-menu{
+      position:fixed;inset:0;z-index:80;background:#000;
+      transform:translateY(-100%);transition:.3s;padding:95px 20px 30px;
+    }
+    .mobile-menu.open{transform:translateY(0)}
+    .mobile-links a{
+      display:block;padding:17px 0;border-bottom:1px solid var(--line);
+      font-family:"Space Grotesk";font-size:34px;letter-spacing:-.06em;text-transform:uppercase;
+    }
+
+    .toast{
+      position:fixed;z-index:200;left:50%;bottom:22px;
+      transform:translate(-50%,20px);opacity:0;pointer-events:none;
+      background:var(--ink);color:#fff;padding:12px 16px;
+      font-size:10px;letter-spacing:.08em;text-transform:uppercase;transition:.25s;
+    }
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+
+    @media(max-width:900px){
+      :root{--header:64px}
+      .container{width:min(calc(100% - 28px),var(--max))}
+      .nav-left .nav-link:nth-child(n+2),.nav-right .nav-link{display:none}
+      .menu-toggle{display:block}
+      .nav{grid-template-columns:40px 1fr 40px}
+      .brand{text-align:center;font-size:19px}
+      .nav-left{gap:0}.nav-right{justify-content:flex-end}
+      .hero{padding-top:10px}
+      .hero-grid{grid-template-columns:1fr;min-height:0}
+      .hero-copy{min-height:520px;padding:38px 28px}
+      .visual{min-height:420px}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}
+      .promo{grid-template-columns:1fr}
+      .promo-visual{min-height:300px}
+      .info-strip{grid-template-columns:repeat(2,1fr)}
+      .info-item:nth-child(2){border-right:0}
+      .info-item:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .footer-main{grid-column:1/-1}
+    }
+
+    @media(max-width:560px){
+      .announcement{font-size:8px}
+      .hero h1{font-size:58px}
+      .hero-copy{min-height:480px}
+      .visual{min-height:320px}
+      .section{padding-top:62px}
+      .section-head{align-items:start;flex-direction:column}
+      .promo,.info-strip,.newsletter{margin-top:62px}
+      .promo-copy{padding:38px 26px}
+      .promo h2{font-size:48px}
+      .info-strip{grid-template-columns:1fr}
+      .info-item,.info-item:nth-child(2){border-right:0;border-bottom:1px solid var(--line)}
+      .info-item:last-child{border-bottom:0}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:30px 18px}
+      .footer-main{grid-column:1/-1}
+      .copyright{flex-direction:column}
+      .signup{width:100%}
+    }
+  
+.logo-text{
+  display:inline-block;
+  color:#fff;
+  font-size:clamp(18px,2vw,28px);
+  font-weight:900;
+  letter-spacing:-.04em;
+  line-height:1;
+  text-decoration:none;
+}
+
+    .product-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .placeholder-art{width:100%;height:100%;min-height:320px;display:grid;place-items:center;background:#151515;color:#444;font-size:28px;font-weight:900;letter-spacing:-.04em}
+    .placeholder-art span{transform:rotate(-7deg)}
+
+</style>
+</head>
+
+<body>
+  <div class="announcement">ENVÍOS A TODO EL PAÍS · TODOS LOS MEDIOS DE PAGO · CUOTAS · PRENDAS ÚNICAS</div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <div class="nav-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+        <a class="nav-link" href="#shop">Shop</a>
+        <a class="nav-link" href="#categorias">Categorías</a>
+      </div>
+
+      <a class="brand" href="#">PILCHALACONE</a>
+
+      <div class="nav-right">
+        <a class="nav-link" href="#destacados">Destacados</a>
+        <a class="nav-link" href="#info">Info</a>
+        <button class="cart-button" id="cartOpen" aria-label="Abrir carrito">
+          Carrito <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-links">
+      <a href="#shop">Shop</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#destacados">Destacados</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#info">Info</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div>
+            <div class="eyebrow">PILCHALACONE / DROP 01</div>
+            <h1>Prendas<br>que hablan<br>por sí solas.</h1>
+            <p>Streetwear, vintage y piezas únicas seleccionadas una por una. Un catálogo para encontrar algo distinto.</p>
+            <div class="hero-actions">
+              <a href="#shop" class="btn btn-light">Ver colección</a>
+              <a href="#destacados" class="btn">Destacados</a>
+            </div>
+          </div>
+          <div class="hero-meta">
+            <span>Prendas únicas</span>
+            <span>Compra online</span>
+            <span>Envíos nacionales</span>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="visual-label">Imagen de campaña — próximamente</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>PILCHALACONE <i>✦</i></span><span>STREETWEAR <i>✦</i></span>
+        <span>VINTAGE <i>✦</i></span><span>PRENDAS ÚNICAS <i>✦</i></span>
+        <span>DROPS <i>✦</i></span><span>PILCHALACONE <i>✦</i></span>
+        <span>STREETWEAR <i>✦</i></span><span>VINTAGE <i>✦</i></span>
+        <span>PRENDAS ÚNICAS <i>✦</i></span><span>DROPS <i>✦</i></span>
+      </div>
+    </div>
+
+    <section class="section container" id="categorias">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Explorá</p>
+          <h2 class="section-title">Categorías</h2>
+        </div>
+      </div>
+
+      <div class="categories">
+        <div id="dynamicCategories" style="display:contents"></div>
+        <button class="cat active" data-filter="all">Todo</button>
+      </div>
+    </section>
+
+    <section class="section container" id="shop">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Shop</p>
+          <h2 class="section-title">Últimas prendas</h2>
+        </div>
+        <a class="section-link" href="#shop">Ver todo</a>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="section container" id="destacados">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Selección PILCHALACONE</p>
+          <h2 class="section-title">Destacados</h2>
+        </div>
+      </div>
+      <div class="product-grid" id="featuredGrid"></div>
+    </section>
+
+    <section class="container" id="ofertas">
+      <div class="promo">
+        <div class="promo-copy">
+          <p class="section-kicker" style="color:#777">Oferta / Archivo</p>
+          <h2>Piezas únicas.<br>Últimas unidades.</h2>
+          <p>Una selección de prendas especiales con stock limitado. Cuando se van, no siempre vuelven.</p>
+          <div class="hero-actions">
+            <a href="#shop" class="btn btn-light">Ver ofertas</a>
+          </div>
+        </div>
+        <div class="promo-visual"><strong>SALE</strong></div>
+      </div>
+    </section>
+
+    <section class="container" id="info">
+      <div class="info-strip">
+        <div class="info-item">
+          <div class="info-icon">↗</div>
+          <h3>Envíos</h3>
+          <p>Enviamos a todo el país. El costo y plazo se calculan según destino.</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">□</div>
+          <h3>Pagos</h3>
+          <p>Transferencia y medios de pago online. Configuración final pendiente.</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">◎</div>
+          <h3>Prendas únicas</h3>
+          <p>Stock limitado y piezas seleccionadas. Consultá disponibilidad.</p>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">✦</div>
+          <h3>Ayuda</h3>
+          <p>Si necesitás medidas, fotos o asesoramiento, escribinos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter container">
+      <p class="section-kicker">No te pierdas el próximo drop</p>
+      <h2>Entrá al archivo</h2>
+      <p>Dejá tu mail y recibí novedades, nuevos ingresos y drops antes que nadie.</p>
+      <form class="signup" id="signupForm">
+        <input type="email" id="email" placeholder="tu@email.com" required aria-label="Email" />
+        <button type="submit">Suscribirme →</button>
+      </form>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-main">
+          <div class="footer-brand">PILCHALACONE</div>
+          <p class="footer-desc">Streetwear, vintage y prendas únicas. Un archivo pensado para quienes buscan algo distinto.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="#shop">Todas las prendas</a>
+          <a href="#categorias">Categorías</a>
+          <a href="#destacados">Destacados</a>
+          <a href="#ofertas">Ofertas</a>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <a href="#info">Envíos</a>
+          <a href="#info">Pagos</a>
+          <a href="#info">Cambios</a>
+          <a href="#info">Preguntas frecuentes</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="#" id="instagramLink">Instagram</a>
+          <a href="#" id="whatsappLink">WhatsApp</a>
+          <a href="mailto:hola@pilchalacone.com">Email</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2026 PILCHALACONE</span>
+        <span>Streetwear / Vintage / Archivo</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="cart" id="cartPanel" aria-label="Carrito de compra">
+    <div class="cart-head">
+      <h2>Tu carrito</h2>
+      <button class="close" id="cartClose" aria-label="Cerrar carrito">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="empty">Tu carrito está vacío.<br>Agregá una prenda para empezar.</div>
+    </div>
+    <div class="cart-foot">
+      <div class="total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+      <button class="checkout" id="checkout">Comprar por WhatsApp</button>
+      <p class="cart-note">El pedido se prepara después de confirmar disponibilidad y forma de pago.</p>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /*
+      CONFIGURACIÓN:
+      Cuando tengamos los datos reales, cambiamos solamente estos valores.
+    */
+    const CONFIG = {
+      whatsapp: "5491100000000",
+      instagram: "https://instagram.com/",
+      currency: "$"
+    };
+
+    /*
+      PRODUCTOS:
+      Por ahora usamos placeholders. Después reemplazamos imagen, nombre,
+      precio, talle y demás datos por los productos reales.
+    */
+    const DEFAULT_PRODUCTS = [
+      {id:1,name:"Campera Vintage 01",category:"camperas",price:85000,sizes:["M"],description:"Campera vintage seleccionada.",tags:["Nuevo"],badge:"Nuevo",featured:true,sale:false,stock:1,images:[],sub:"Talle M / Única"},
+      {id:2,name:"Hoodie Archive 02",category:"buzos",price:62000,sizes:["L"],description:"Hoodie de archivo.",tags:["Drop"],badge:"Drop",featured:true,sale:false,stock:1,images:[],sub:"Talle L / Única"},
+      {id:3,name:"Remera Graphic 03",category:"remeras",price:38000,sizes:["M"],description:"Remera gráfica.",tags:["Nuevo"],badge:"Nuevo",featured:false,sale:false,stock:1,images:[],sub:"Talle M / Única"},
+      {id:4,name:"Pantalón Cargo 04",category:"pantalones",price:59000,sizes:["42"],description:"Pantalón cargo.",tags:[],badge:"",featured:false,sale:false,stock:1,images:[],sub:"Talle 42 / Única"},
+      {id:5,name:"Jersey Vintage 05",category:"jerseys",price:72000,sizes:["L"],description:"Jersey vintage.",tags:["Archivo"],badge:"Archivo",featured:true,sale:false,stock:1,images:[],sub:"Talle L / Única"},
+      {id:6,name:"Zapatillas 06",category:"zapatillas",price:98000,sizes:["42"],description:"Zapatillas seleccionadas.",tags:["Últimas"],badge:"Últimas",featured:true,sale:false,stock:1,images:[],sub:"Talle 42 / Única"},
+      {id:7,name:"Remera Washed 07",category:"remeras",price:35000,sizes:["M"],description:"Remera washed.",tags:[],badge:"",featured:false,sale:false,stock:1,images:[],sub:"Talle M / Única"},
+      {id:8,name:"Accesorio 08",category:"accesorios",price:28000,sizes:["Única"],description:"Accesorio de archivo.",tags:[],badge:"",featured:false,sale:false,stock:1,images:[],sub:"Única"}
+    ];
+
+    const savedProducts = localStorage.getItem("pilchalacone-products");
+    let products = savedProducts ? JSON.parse(savedProducts) : DEFAULT_PRODUCTS;
+    if(!Array.isArray(products) || !products.length) products = DEFAULT_PRODUCTS;
+
+    let cart = JSON.parse(localStorage.getItem("pilchalacone-cart") || "[]");
+    let activeFilter = "all";
+
+    const money = n => CONFIG.currency + Number(n).toLocaleString("es-AR");
+
+    function escapeHtml(value){
+      return String(value ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function productCard(p){
+      const image = p.images && p.images[0]
+        ? `<img src="${p.images[0]}" alt="${escapeHtml(p.name)}" loading="lazy">`
+        : `<div class="placeholder-art"><span>${escapeHtml((p.category || "PILCHA").toUpperCase())}</span></div>`;
+
+      const tags = Array.isArray(p.tags) ? p.tags : (p.tag ? [p.tag] : []);
+      const tagHtml = tags.slice(0,2).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("");
+      const saleClass = p.sale ? " sale-card" : "";
+
+      return `
+        <article class="product-card${saleClass}">
+          <button class="product-image" style="width:100%;border:0;padding:0;cursor:pointer" onclick="addToCart(${Number(p.id)})" aria-label="Agregar ${escapeHtml(p.name)}">
+            ${image}
+            ${tagHtml}
+          </button>
+          <div class="product-info">
+            <h3 class="product-name">${escapeHtml(p.name)}</h3>
+            <p class="product-sub">${escapeHtml(p.sub || ((p.sizes || []).join(" / ") || "Consultar"))}</p>
+            <div class="price-row">
+              <span class="price">${money(p.price)}</span>
+              <button class="quick-add" onclick="addToCart(${Number(p.id)})">Agregar</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCategories(){
+      const box = document.getElementById("dynamicCategories");
+      if(!box) return;
+      const names = {
+        camperas:"Camperas", buzos:"Buzos", remeras:"Remeras",
+        pantalones:"Pantalones", zapatillas:"Zapatillas",
+        accesorios:"Accesorios", jerseys:"Jerseys"
+      };
+      const cats = [...new Set(products.map(p => p.category).filter(Boolean))];
+      box.innerHTML = cats.map(c =>
+        `<button class="cat" data-filter="${escapeHtml(c)}">${escapeHtml(names[c] || c)}</button>`
+      ).join("");
+      document.getElementById("cartOpen").addEventListener("click",openCart);
+    document.getElementById("cartClose").addEventListener("click",closeCart);
+    document.getElementById("overlay").addEventListener("click",closeCart);
+
+    document.getElementById("checkout").addEventListener("click",()=>{
+      if(!cart.length){
+        showToast("Tu carrito está vacío");
+        return;
+      }
+      const lines = cart.map(i => `• ${i.name} x${i.qty} — ${money(i.price*i.qty)}`);
+      const total = cart.reduce((sum,i)=>sum+i.price*i.qty,0);
+      const text = [
+        "Hola PILCHALACONE, quiero hacer este pedido:",
+        "",
+        ...lines,
+        "",
+        `TOTAL: ${money(total)}`,
+        "",
+        "¿Me confirman disponibilidad y medios de pago?"
+      ].join("\\n");
+      window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`,"_blank");
+    });
+
+    document.getElementById("signupForm").addEventListener("submit",e=>{
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      if(email){
+        showToast("Gracias. Te sumamos al próximo drop.");
+        e.target.reset();
+      }
+    });
+
+    const mobileMenu = document.getElementById("mobileMenu");
+    document.getElementById("menuToggle").addEventListener("click",()=>{
+      mobileMenu.classList.toggle("open");
+      document.body.classList.toggle("lock");
+    });
+    mobileMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+      mobileMenu.classList.remove("open");
+      document.body.classList.remove("lock");
+    }));
+
+    document.getElementById("instagramLink").href = CONFIG.instagram;
+    document.getElementById("whatsappLink").href = `https://wa.me/${CONFIG.whatsapp}`;
+
+    renderCategories();
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
